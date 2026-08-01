@@ -1,0 +1,7 @@
+{
+  "system.started": "🚀 GoatBot v2 AI Chatbot is online and listening!",
+  "system.loginFailed": "❌ Login failed: %1",
+  "command.notFound": "❌ Command '%1' was not found!",
+  "command.noPermission": "⛔ Permission Denied: You do not have permission to use this command.",
+  "command.error": "❌ An error occurred while executing command: %1"
+}

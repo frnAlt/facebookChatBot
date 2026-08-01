@@ -27,12 +27,15 @@ if (fs.existsSync(configPath)) {
   }
 }
 
+const language = require("./system/language");
+
 // Global GoatBot Core Architecture Object
 global.GoatBot = {
   commands: new Map(),
   events: new Map(),
   onReply: new Map(),
-  config: config
+  config: config,
+  language: language
 };
 
 // Dynamically Load Commands from /scripts/cmds
