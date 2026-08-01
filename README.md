@@ -196,14 +196,20 @@ npm run dev
 | `!group [kick/info/name]` | Admin | Group moderation & title management | Group / Bot Admin |
 | `!admin [add/remove/list]` | Admin | Bot Admin authorization management | Bot Admin Only |
 | `!kick @mention` | Admin | Quick member removal wrapper | Group Admin |
+| `!eval <code>` | Admin | Dynamic JavaScript code evaluator | Bot Admin Only |
 | `!shell <cmd>` | Admin | Executive terminal shell on host server | Bot Admin Only |
 | `!restart` | Admin | Reboots the bot process and reloads modules | Bot Admin Only |
+| `!nickname [@tag] <nick>` | FCA Utility | Change thread member nickname | Group Admin |
+| `!emoji <emoji>` | FCA Utility | Change thread default reaction emoji | Group Admin |
+| `!userinfo [@tag]` | FCA Utility | Fetch Facebook user profile details | Everyone |
+| `!thread [info/leave]` | FCA Utility | View thread info or make bot leave group | Group Admin |
 | `!say <text>` | Media | Text-to-speech voice note generator | Everyone |
 | `!avatar [@tag]` | Utility | Fetch HD Facebook profile picture | Everyone |
 | `!weather <city>` | Utility | Live weather report & temperature | Everyone |
 | `!quote` | Fun | Random inspirational motivational quotes | Everyone |
 | `!daily` | Economy | Claim daily virtual economy coin rewards | Everyone |
 | `!rank` | Economy | Check XP level, rank card, and wallet coins | Everyone |
+| `!slot <bet>` | Economy | Casino slot machine minigame | Everyone |
 | `!help [command]` | System | Interactive command directory & guides | Everyone |
 | `!ping` | System | Bot latency and server response time | Everyone |
 | `!uptime` | System | Server uptime, Node version, and RAM specs | Everyone |
