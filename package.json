@@ -1,0 +1,28 @@
+{
+  "name": "facebookChatBot",
+  "version": "2.0.0",
+  "description": "Modular, high-performance open-source Facebook Messenger Chatbot built on Node.js using GoatBot v2 architecture.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [
+    "goatbot",
+    "chatbot",
+    "facebook-bot",
+    "messenger-bot",
+    "fca",
+    "nodejs-bot"
+  ],
+  "author": "Antigravity Open Source",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "better-sqlite3": "^13.0.2",
+    "chalk": "^4.1.2",
+    "express": "^4.21.2",
+    "fs-extra": "^11.3.0",
+    "moment-timezone": "^0.5.47"
+  }
+}

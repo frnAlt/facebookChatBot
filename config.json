@@ -1,0 +1,24 @@
+{
+  "botName": "GoatBot v2",
+  "prefix": "!",
+  "adminUIDs": [
+    "100000000000000"
+  ],
+  "operatorUIDs": [],
+  "developer": "Antigravity Open Source",
+  "port": 3000,
+  "options": {
+    "listenEvents": true,
+    "selfListen": false,
+    "listenTyping": false,
+    "updateAppState": true,
+    "autoMarkDelivery": true,
+    "autoMarkRead": false
+  },
+  "fcaOptions": {
+    "forceLogin": true,
+    "logLevel": "silent",
+    "updatePresence": true,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+  }
+}

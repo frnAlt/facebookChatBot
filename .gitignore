@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Environment & Sensitive state
+.env
+appState.json
+
+# Local database store
+system/db/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.log
