@@ -108,7 +108,7 @@ function setupMQTTListener(fcaEngine, api) {
       unsend: (messageID) => fcaEngine.unsendMessage(messageID)
     };
 
-    // 1. Execute registered event modules (welcome, leave)
+    // 1. Execute registered event modules (welcome, leave, antiout)
     for (const [eventName, evtModule] of global.GoatBot.events.entries()) {
       try {
         if (typeof evtModule.onEvent === "function") {
@@ -119,7 +119,22 @@ function setupMQTTListener(fcaEngine, api) {
       }
     }
 
-    // 2. Execute onChat hooks across all modules (for conversation memory & auto AI responses)
+    // 2. Handle onReply callbacks if user replied to a bot message
+    if (event.type === "message_reply" && event.messageReply) {
+      const replyData = global.GoatBot.onReply.get(event.messageReply.messageID);
+      if (replyData && replyData.commandName) {
+        const command = global.GoatBot.commands.get(replyData.commandName);
+        if (command && typeof command.onReply === "function") {
+          try {
+            await command.onReply({ api, event, message: messageHelper, replyData, db, memory, logger, fcaEngine });
+          } catch (rErr) {
+            logger.error(`Error in onReply [${replyData.commandName}]: ${rErr.message}`);
+          }
+        }
+      }
+    }
+
+    // 3. Execute onChat hooks across all modules (for conversation memory & auto AI responses)
     for (const [cmdName, cmdModule] of global.GoatBot.commands.entries()) {
       if (typeof cmdModule.onChat === "function") {
         try {
@@ -130,7 +145,7 @@ function setupMQTTListener(fcaEngine, api) {
       }
     }
 
-    // 3. Process Prefixed Commands
+    // 4. Process Prefixed Commands
     if ((event.type === "message" || event.type === "message_reply") && event.body) {
       try {
         const threadPrefix = db.getThreadPrefix(event.threadID, global.GoatBot.config.prefix);
@@ -144,7 +159,7 @@ function setupMQTTListener(fcaEngine, api) {
         const command = global.GoatBot.commands.get(commandName);
         if (!command) return;
 
-        // Check Permissions
+        // Check Permissions (0: Everyone, 1: Group Admin, 2: Bot Admin)
         const isBotAdmin = global.GoatBot.config.adminUIDs.includes(event.senderID);
         const roleRequired = command.config.role || 0;
 
@@ -176,7 +191,7 @@ function setupMQTTListener(fcaEngine, api) {
   });
 }
 
-// Main Launcher
+// Main Master Launcher
 async function startBot() {
   logger.banner();
 
@@ -193,7 +208,7 @@ async function startBot() {
   try {
     const api = await fcaEngine.init();
     if (api) {
-      logger.success("🚀 GoatBot v2 AI Chatbot is online and listening!");
+      logger.success("🚀 GoatBot v2 x Floppa-Chatbot Fusion Engine is online and listening!");
       setupMQTTListener(fcaEngine, api);
     }
   } catch (loginErr) {
