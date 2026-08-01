@@ -196,6 +196,8 @@ npm run dev
 | `!group [kick/info/name]` | Admin | Group moderation & title management | Group / Bot Admin |
 | `!admin [add/remove/list]` | Admin | Bot Admin authorization management | Bot Admin Only |
 | `!kick @mention` | Admin | Quick member removal wrapper | Group Admin |
+| `!warn [@mention/reset]` | Admin | Member warning system with auto-kick at 3 warns | Group Admin |
+| `!antiout [on/off]` | Admin | Toggle auto re-add antiout protection | Group Admin |
 | `!eval <code>` | Admin | Dynamic JavaScript code evaluator | Bot Admin Only |
 | `!shell <cmd>` | Admin | Executive terminal shell on host server | Bot Admin Only |
 | `!restart` | Admin | Reboots the bot process and reloads modules | Bot Admin Only |
@@ -204,6 +206,7 @@ npm run dev
 | `!userinfo [@tag]` | FCA Utility | Fetch Facebook user profile details | Everyone |
 | `!thread [info/leave]` | FCA Utility | View thread info or make bot leave group | Group Admin |
 | `!say <text>` | Media | Text-to-speech voice note generator | Everyone |
+| `!sing <song>` | Media | Search and stream music audio preview | Everyone |
 | `!avatar [@tag]` | Utility | Fetch HD Facebook profile picture | Everyone |
 | `!weather <city>` | Utility | Live weather report & temperature | Everyone |
 | `!quote` | Fun | Random inspirational motivational quotes | Everyone |
