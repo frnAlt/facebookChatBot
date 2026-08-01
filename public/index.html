@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoatBot v2 | Command & Control Panel</title>
+  <title>facebookChatBot | Floppa-Style Control Panel</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="background-decor"></div>
@@ -15,24 +15,25 @@
     <!-- Header -->
     <header class="header">
       <div class="brand">
-        <i class="fa-solid fa-microchip brand-icon"></i>
+        <i class="fa-solid fa-robot brand-icon"></i>
         <div>
-          <h1>GoatBot <span>v2</span></h1>
-          <p class="tagline">Safe FCA Engine & Humanized AI Automation</p>
+          <h1>facebookChatBot <span>v2</span></h1>
+          <p class="tagline">Floppa-Style Messenger Architecture & Safe FCA Engine</p>
         </div>
       </div>
       <div class="status-badge" id="statusBadge">
         <span class="pulse-dot"></span>
-        <span id="statusText">Engine Active</span>
+        <span id="statusText">System Online</span>
       </div>
     </header>
 
     <!-- Navigation Tabs -->
     <nav class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('overview')"><i class="fa-solid fa-chart-line"></i> Overview</button>
-      <button class="tab-btn" onclick="switchTab('commands')"><i class="fa-solid fa-code"></i> Commands (<span id="cmdCountNav">0</span>)</button>
-      <button class="tab-btn" onclick="switchTab('threads')"><i class="fa-solid fa-comments"></i> Threads Memory</button>
-      <button class="tab-btn" onclick="switchTab('developer')"><i class="fa-solid fa-user-shield"></i> Developer Info</button>
+      <button class="tab-btn active" onclick="switchTab('overview', event)"><i class="fa-solid fa-chart-line"></i> Overview</button>
+      <button class="tab-btn" onclick="switchTab('terminal', event)"><i class="fa-solid fa-terminal"></i> Live Logs</button>
+      <button class="tab-btn" onclick="switchTab('commands', event)"><i class="fa-solid fa-code"></i> Commands (<span id="cmdCountNav">0</span>)</button>
+      <button class="tab-btn" onclick="switchTab('threads', event)"><i class="fa-solid fa-comments"></i> SQLite Memory</button>
+      <button class="tab-btn" onclick="switchTab('developer', event)"><i class="fa-solid fa-user-shield"></i> Developer Info</button>
     </nav>
 
     <!-- Tab 1: Overview -->
@@ -58,25 +59,41 @@
           <div class="icon-wrapper green"><i class="fa-solid fa-database"></i></div>
           <div class="stat-info">
             <h3 id="dbMsgCount">0</h3>
-            <p>Messages in SQLite</p>
+            <p>SQLite Chat Messages</p>
           </div>
         </div>
 
         <div class="card stat-card">
-          <div class="icon-wrapper orange"><i class="fa-solid fa-clock"></i></div>
+          <div class="icon-wrapper orange"><i class="fa-solid fa-microchip"></i></div>
+          <div class="stat-info">
+            <h3 id="ramCount">0 MB</h3>
+            <p>Heap RAM Used</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="icon-wrapper cyan"><i class="fa-solid fa-clock"></i></div>
           <div class="stat-info">
             <h3 id="uptimeVal">0s</h3>
-            <p>System Uptime</p>
+            <p>Server Uptime</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="icon-wrapper red"><i class="fa-solid fa-hashtag"></i></div>
+          <div class="stat-info">
+            <h3 id="prefixVal">!</h3>
+            <p>Default Prefix</p>
           </div>
         </div>
 
         <section class="card full-width">
-          <h2><i class="fa-solid fa-shield-halved"></i> Safety & Architecture Features</h2>
+          <h2><i class="fa-solid fa-shield-halved"></i> Safety & Architecture System</h2>
           <div class="features-grid">
             <div class="feature-item">
               <i class="fa-solid fa-stopwatch"></i>
-              <h4>Humanized Delays</h4>
-              <p>Message queue with 1.2s–3.0s jitter delays to mimic human interaction.</p>
+              <h4>Jitter Queue Delay</h4>
+              <p>Randomized 1.2s–3.0s sending queue prevents Facebook spam restrictions.</p>
             </div>
             <div class="feature-item">
               <i class="fa-solid fa-keyboard"></i>
@@ -86,22 +103,38 @@
             <div class="feature-item">
               <i class="fa-solid fa-brain"></i>
               <h4>SQLite Context Memory</h4>
-              <p>Stores user messages & history for natural conversational AI context.</p>
+              <p>Stores user chat logs for contextual human-like AI responses.</p>
             </div>
             <div class="feature-item">
               <i class="fa-solid fa-key"></i>
-              <h4>Session Auto-Save</h4>
-              <p>Refreshes and saves <code>appState.json</code> cookies on every session login.</p>
+              <h4>Cookie Auto-Refresh</h4>
+              <p>Refreshes and saves <code>appState.json</code> session cookies on login.</p>
             </div>
           </div>
         </section>
       </div>
     </main>
 
-    <!-- Tab 2: Commands -->
+    <!-- Tab 2: Terminal Logs -->
+    <main id="tab-terminal" class="tab-content">
+      <div class="card full-width">
+        <div class="terminal-header">
+          <h2><i class="fa-solid fa-terminal"></i> Live Server Output Console</h2>
+          <button class="clear-btn" onclick="fetchLogs()"><i class="fa-solid fa-rotate"></i> Refresh Logs</button>
+        </div>
+        <div class="terminal-box" id="terminalBox">
+          <p class="log-line info">[ SYSTEM ] Initializing Live Terminal Console Output...</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Tab 3: Commands -->
     <main id="tab-commands" class="tab-content">
       <div class="card full-width">
-        <h2><i class="fa-solid fa-list-check"></i> Registered Commands</h2>
+        <div class="table-header">
+          <h2><i class="fa-solid fa-list-check"></i> Registered Command Suite</h2>
+          <input type="text" id="cmdSearch" class="search-input" placeholder="Search commands..." onkeyup="filterCommands()">
+        </div>
         <div class="table-container">
           <table class="custom-table">
             <thead>
@@ -109,28 +142,29 @@
                 <th>Command</th>
                 <th>Category</th>
                 <th>Description</th>
-                <th>Role Level</th>
+                <th>Cooldown</th>
+                <th>Permission</th>
               </tr>
             </thead>
             <tbody id="commandsTableBody">
-              <tr><td colspan="4">Loading commands...</td></tr>
+              <tr><td colspan="5">Loading command suite...</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </main>
 
-    <!-- Tab 3: Threads Memory -->
+    <!-- Tab 4: Threads Memory -->
     <main id="tab-threads" class="tab-content">
       <div class="card full-width">
         <h2><i class="fa-solid fa-comments"></i> Active SQLite Threads Memory</h2>
         <div id="threadsList" class="threads-list">
-          <p>Loading thread data...</p>
+          <p>Loading SQLite threads data...</p>
         </div>
       </div>
     </main>
 
-    <!-- Tab 4: Developer -->
+    <!-- Tab 5: Developer Info -->
     <main id="tab-developer" class="tab-content">
       <div class="card full-width dev-card">
         <div class="dev-header">
@@ -153,16 +187,18 @@
 
     <!-- Footer -->
     <footer>
-      <p>GoatBot v2 Open Source Engine • Developed by <strong>Farhan Muh Tasim</strong> (@Gtajisan / @frnAlt)</p>
+      <p>facebookChatBot v2 • Developed by <strong>Farhan Muh Tasim</strong> (@Gtajisan / @frnAlt)</p>
     </footer>
   </div>
 
   <script>
-    function switchTab(tabId) {
+    let allCommands = [];
+
+    function switchTab(tabId, evt) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
       
-      event.currentTarget.classList.add('active');
+      if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
       document.getElementById(`tab-${tabId}`).classList.add('active');
     }
 
@@ -175,7 +211,12 @@
         document.getElementById('cmdCountNav').textContent = data.commandsCount || 0;
         document.getElementById('eventCount').textContent = data.eventsCount || 0;
         document.getElementById('dbMsgCount').textContent = data.totalMessagesRecorded || 0;
+        document.getElementById('prefixVal').textContent = data.prefix || '!';
         
+        if (data.memoryUsage) {
+          document.getElementById('ramCount').textContent = `${data.memoryUsage.heapUsedMB || 0} MB`;
+        }
+
         const uptimeSec = Math.floor(data.uptime || 0);
         const hrs = Math.floor(uptimeSec / 3600);
         const mins = Math.floor((uptimeSec % 3600) / 60);
@@ -186,27 +227,71 @@
       }
     }
 
+    async function fetchLogs() {
+      try {
+        const res = await fetch('/api/logs');
+        const logs = await res.json();
+        const box = document.getElementById('terminalBox');
+        box.innerHTML = '';
+        
+        if (logs.length === 0) {
+          box.innerHTML = '<p class="log-line info">[ SYSTEM ] Server terminal online. Awaiting system logs...</p>';
+          return;
+        }
+
+        logs.forEach(log => {
+          const p = document.createElement('p');
+          const lvlClass = log.level ? log.level.toLowerCase() : 'info';
+          p.className = `log-line ${lvlClass}`;
+          p.textContent = `[ ${log.timestamp} ][ ${log.level} ] ${log.message}`;
+          box.appendChild(p);
+        });
+      } catch (err) {
+        console.error('Logs fetch error:', err);
+      }
+    }
+
     async function fetchCommands() {
       try {
         const res = await fetch('/api/commands');
-        const commands = await res.json();
-        const tbody = document.getElementById('commandsTableBody');
-        tbody.innerHTML = '';
-        
-        commands.forEach(cmd => {
-          const roleLabel = cmd.role === 2 ? 'Bot Admin' : (cmd.role === 1 ? 'Group Admin' : 'Everyone');
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td><strong>!${cmd.name}</strong></td>
-            <td><span class="tag">${cmd.category}</span></td>
-            <td>${cmd.shortDescription}</td>
-            <td><span class="role-badge role-${cmd.role}">${roleLabel}</span></td>
-          `;
-          tbody.appendChild(tr);
-        });
+        allCommands = await res.json();
+        renderCommands(allCommands);
       } catch (err) {
         console.error('Commands fetch error:', err);
       }
+    }
+
+    function renderCommands(cmds) {
+      const tbody = document.getElementById('commandsTableBody');
+      tbody.innerHTML = '';
+      
+      if (cmds.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No commands matched search.</td></tr>';
+        return;
+      }
+
+      cmds.forEach(cmd => {
+        const roleLabel = cmd.role === 2 ? 'Bot Admin' : (cmd.role === 1 ? 'Group Admin' : 'Everyone');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>!${cmd.name}</strong></td>
+          <td><span class="tag">${cmd.category}</span></td>
+          <td>${cmd.shortDescription}</td>
+          <td>${cmd.countDown || 0}s</td>
+          <td><span class="role-badge role-${cmd.role}">${roleLabel}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterCommands() {
+      const query = document.getElementById('cmdSearch').value.toLowerCase();
+      const filtered = allCommands.filter(c => 
+        c.name.toLowerCase().includes(query) || 
+        c.category.toLowerCase().includes(query) ||
+        c.shortDescription.toLowerCase().includes(query)
+      );
+      renderCommands(filtered);
     }
 
     async function fetchThreads() {
@@ -227,7 +312,7 @@
           item.innerHTML = `
             <div>
               <strong>Thread ID: ${t.threadID}</strong>
-              <p>${t.totalMessages} messages recorded</p>
+              <p>${t.totalMessages} chat messages recorded</p>
             </div>
             <span class="tag">${new Date(t.lastActive).toLocaleTimeString()}</span>
           `;
@@ -239,9 +324,11 @@
     }
 
     fetchStats();
+    fetchLogs();
     fetchCommands();
     fetchThreads();
-    setInterval(fetchStats, 5000);
+    setInterval(fetchStats, 4000);
+    setInterval(fetchLogs, 4000);
   </script>
 </body>
 </html>
