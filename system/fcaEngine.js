@@ -95,10 +95,20 @@ class FCAEngine {
           logger.warn(`Cookie auto-save warning: ${saveErr.message}`);
         }
 
-        logger.success("✅ Custom FCA Engine active with humanized activity queues.");
+        logger.success("✅ Custom FCA Safe Engine active with humanized anti-ban queues.");
         resolve(this.api);
       });
     });
+  }
+
+  // Engine status metrics for dashboard
+  getEngineStatus() {
+    return {
+      active: Boolean(this.api),
+      queueSize: this.messageQueue.length,
+      isProcessing: this.isProcessingQueue,
+      jitterDelayRange: `${this.minDelayMs}ms - ${this.maxDelayMs}ms`
+    };
   }
 
   // --- Safe Message Queue with Humanized Delays & Typing Simulation ---
