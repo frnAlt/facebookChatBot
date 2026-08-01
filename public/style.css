@@ -1,6 +1,6 @@
 :root {
-  --bg-dark: #0b0f19;
-  --card-bg: rgba(22, 28, 45, 0.75);
+  --bg-dark: #090c15;
+  --card-bg: rgba(17, 23, 39, 0.8);
   --border-color: rgba(255, 255, 255, 0.08);
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -31,11 +31,23 @@ body {
 
 .background-decor {
   position: absolute;
-  width: 750px;
-  height: 750px;
-  background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, rgba(168,85,247,0.06) 50%, transparent 70%);
-  top: -150px;
-  right: -150px;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(56,189,248,0.14) 0%, rgba(168,85,247,0.07) 50%, transparent 70%);
+  top: -200px;
+  right: -200px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(70px);
+}
+
+.background-decor-secondary {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(52,211,153,0.08) 0%, transparent 65%);
+  bottom: -150px;
+  left: -150px;
   border-radius: 50%;
   pointer-events: none;
   filter: blur(60px);
@@ -43,7 +55,7 @@ body {
 
 .dashboard-container {
   width: 92%;
-  max-width: 1080px;
+  max-width: 1100px;
   margin: 30px auto;
   z-index: 1;
 }
@@ -63,27 +75,51 @@ body {
   gap: 16px;
 }
 
-.brand-icon {
-  font-size: 2.2rem;
-  color: var(--accent-cyan);
-  background: rgba(56, 189, 248, 0.1);
+.brand-icon-box {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
+  border: 1px solid rgba(56, 189, 248, 0.4);
   padding: 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 18px;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+.brand-icon {
+  font-size: 2.4rem;
+  color: var(--accent-cyan);
 }
 
 .brand h1 {
-  font-size: 1.8rem;
+  font-size: 1.85rem;
   font-weight: 700;
 }
 
-.brand h1 span {
+.version-tag {
   color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.15);
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 1.1rem;
 }
 
 .tagline {
   color: var(--text-secondary);
   font-size: 0.88rem;
+}
+
+.header-badges {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-badge {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: var(--accent-purple);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .status-badge {
@@ -142,7 +178,8 @@ body {
 .tab-btn:hover, .tab-btn.active {
   background: rgba(56, 189, 248, 0.15);
   color: var(--accent-cyan);
-  border-color: rgba(56, 189, 248, 0.3);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.15);
 }
 
 .tab-content {
@@ -162,11 +199,11 @@ body {
 
 .card {
   background: var(--card-bg);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 24px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
@@ -183,7 +220,7 @@ body {
 .icon-wrapper {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -210,6 +247,11 @@ body {
 .full-width {
   grid-column: 1 / -1;
   margin-top: 10px;
+}
+
+.glow-box {
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.05);
 }
 
 .full-width h2 {
@@ -277,17 +319,18 @@ body {
 }
 
 .terminal-box {
-  background: #05070d;
+  background: #04060b;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 16px;
-  height: 360px;
+  height: 380px;
   overflow-y: auto;
   font-family: 'Fira Code', monospace;
   font-size: 0.85rem;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
 }
 
 .log-line {
@@ -316,7 +359,7 @@ body {
   border-radius: 10px;
   font-size: 0.85rem;
   outline: none;
-  width: 220px;
+  width: 240px;
 }
 
 .search-input:focus {
@@ -384,6 +427,11 @@ body {
 /* Developer Card */
 .dev-card {
   padding: 30px;
+}
+
+.glow-card {
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.1);
 }
 
 .dev-header {

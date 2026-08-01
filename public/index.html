@@ -10,20 +10,26 @@
 </head>
 <body>
   <div class="background-decor"></div>
+  <div class="background-decor-secondary"></div>
 
   <div class="dashboard-container">
-    <!-- Header -->
+    <!-- Header Banner -->
     <header class="header">
       <div class="brand">
-        <i class="fa-solid fa-robot brand-icon"></i>
+        <div class="brand-icon-box">
+          <i class="fa-solid fa-cat brand-icon"></i>
+        </div>
         <div>
-          <h1>facebookChatBot <span>v2</span></h1>
+          <h1>facebookChatBot <span class="version-tag">v2</span></h1>
           <p class="tagline">Floppa-Style Messenger Architecture & Safe FCA Engine</p>
         </div>
       </div>
-      <div class="status-badge" id="statusBadge">
-        <span class="pulse-dot"></span>
-        <span id="statusText">System Online</span>
+      <div class="header-badges">
+        <div class="status-badge" id="statusBadge">
+          <span class="pulse-dot"></span>
+          <span id="statusText">Engine Active</span>
+        </div>
+        <div class="mini-badge purple"><i class="fa-brands fa-node-js"></i> Node.js v18+</div>
       </div>
     </header>
 
@@ -31,31 +37,31 @@
     <nav class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab('overview', event)"><i class="fa-solid fa-chart-line"></i> Overview</button>
       <button class="tab-btn" onclick="switchTab('terminal', event)"><i class="fa-solid fa-terminal"></i> Live Logs</button>
-      <button class="tab-btn" onclick="switchTab('commands', event)"><i class="fa-solid fa-code"></i> Commands (<span id="cmdCountNav">0</span>)</button>
+      <button class="tab-btn" onclick="switchTab('commands', event)"><i class="fa-solid fa-code"></i> Commands (<span id="cmdCountNav">25</span>)</button>
       <button class="tab-btn" onclick="switchTab('threads', event)"><i class="fa-solid fa-comments"></i> SQLite Memory</button>
-      <button class="tab-btn" onclick="switchTab('developer', event)"><i class="fa-solid fa-user-shield"></i> Developer Info</button>
+      <button class="tab-btn" onclick="switchTab('developer', event)"><i class="fa-solid fa-user-astronaut"></i> Developer Info</button>
     </nav>
 
     <!-- Tab 1: Overview -->
     <main id="tab-overview" class="tab-content active">
       <div class="grid-layout">
-        <div class="card stat-card">
+        <div class="card stat-card blue">
           <div class="icon-wrapper blue"><i class="fa-solid fa-terminal"></i></div>
           <div class="stat-info">
-            <h3 id="cmdCount">0</h3>
+            <h3 id="cmdCount">25</h3>
             <p>Loaded Commands</p>
           </div>
         </div>
 
-        <div class="card stat-card">
+        <div class="card stat-card purple">
           <div class="icon-wrapper purple"><i class="fa-solid fa-bolt"></i></div>
           <div class="stat-info">
-            <h3 id="eventCount">0</h3>
+            <h3 id="eventCount">2</h3>
             <p>Active Events</p>
           </div>
         </div>
 
-        <div class="card stat-card">
+        <div class="card stat-card green">
           <div class="icon-wrapper green"><i class="fa-solid fa-database"></i></div>
           <div class="stat-info">
             <h3 id="dbMsgCount">0</h3>
@@ -63,7 +69,7 @@
           </div>
         </div>
 
-        <div class="card stat-card">
+        <div class="card stat-card orange">
           <div class="icon-wrapper orange"><i class="fa-solid fa-microchip"></i></div>
           <div class="stat-info">
             <h3 id="ramCount">0 MB</h3>
@@ -71,7 +77,7 @@
           </div>
         </div>
 
-        <div class="card stat-card">
+        <div class="card stat-card cyan">
           <div class="icon-wrapper cyan"><i class="fa-solid fa-clock"></i></div>
           <div class="stat-info">
             <h3 id="uptimeVal">0s</h3>
@@ -79,7 +85,7 @@
           </div>
         </div>
 
-        <div class="card stat-card">
+        <div class="card stat-card red">
           <div class="icon-wrapper red"><i class="fa-solid fa-hashtag"></i></div>
           <div class="stat-info">
             <h3 id="prefixVal">!</h3>
@@ -87,8 +93,8 @@
           </div>
         </div>
 
-        <section class="card full-width">
-          <h2><i class="fa-solid fa-shield-halved"></i> Safety & Architecture System</h2>
+        <section class="card full-width glow-box">
+          <h2><i class="fa-solid fa-shield-halved glow-icon"></i> Safety & Architecture Capabilities</h2>
           <div class="features-grid">
             <div class="feature-item">
               <i class="fa-solid fa-stopwatch"></i>
@@ -133,7 +139,7 @@
       <div class="card full-width">
         <div class="table-header">
           <h2><i class="fa-solid fa-list-check"></i> Registered Command Suite</h2>
-          <input type="text" id="cmdSearch" class="search-input" placeholder="Search commands..." onkeyup="filterCommands()">
+          <input type="text" id="cmdSearch" class="search-input" placeholder="Search 25 commands..." onkeyup="filterCommands()">
         </div>
         <div class="table-container">
           <table class="custom-table">
@@ -166,7 +172,7 @@
 
     <!-- Tab 5: Developer Info -->
     <main id="tab-developer" class="tab-content">
-      <div class="card full-width dev-card">
+      <div class="card full-width dev-card glow-card">
         <div class="dev-header">
           <i class="fa-solid fa-user-astronaut dev-avatar"></i>
           <div>
@@ -187,7 +193,7 @@
 
     <!-- Footer -->
     <footer>
-      <p>facebookChatBot v2 • Developed by <strong>Farhan Muh Tasim</strong> (@Gtajisan / @frnAlt)</p>
+      <p>facebookChatBot v2 • Developed by <strong>Farhan Muh Tasim</strong> (<a href="https://github.com/Gtajisan" target="_blank" style="color: var(--accent-cyan);">@Gtajisan</a> / <a href="https://github.com/frnAlt" target="_blank" style="color: var(--accent-purple);">@frnAlt</a>)</p>
     </footer>
   </div>
 
