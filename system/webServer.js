@@ -38,7 +38,7 @@ function startWebServer(port = 3000) {
     res.json({
       status: "online",
       botName: global.GoatBot?.config?.botName || "GoatBot v2",
-      developer: "Farhan Muh Tasim (@Gtajisan)",
+      developer: "Gtajisan",
       prefix: global.GoatBot?.config?.prefix || "!",
       uptime: process.uptime(),
       commandsCount: global.GoatBot?.commands?.size || 0,
@@ -74,7 +74,7 @@ function startWebServer(port = 3000) {
           category: module.config.category || "General",
           shortDescription: module.config.shortDescription || module.config.description || "No description",
           role: module.config.role || 0,
-          author: module.config.author || "Farhan Muh Tasim",
+          author: module.config.author || "Gtajisan",
           countDown: module.config.countDown || 0
         });
       }

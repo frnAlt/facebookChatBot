@@ -58,7 +58,7 @@
 
 ```json
 {
-  "developer": "Farhan Muh Tasim",
+  "developer": "Gtajisan",
   "aliases": ["Gtajisan", "frnAlt"],
   "location": "Chattogram, Bangladesh",
   "role": "Backend Developer & Cybersecurity Enthusiast",
@@ -308,5 +308,5 @@ git push origin main
 This project is open-source under the [MIT License](LICENSE).
 
 <div align="center">
-  <sub>Built with ❤️ by <strong>Farhan Muh Tasim</strong> (<a href="https://github.com/Gtajisan">@Gtajisan</a> / <a href="https://github.com/frnAlt">@frnAlt</a>)</sub>
+  <sub>Built with ❤️ by <strong>Gtajisan</strong> (<a href="https://github.com/Gtajisan">@Gtajisan</a> / <a href="https://github.com/frnAlt">@frnAlt</a>)</sub>
 </div>
