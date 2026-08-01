@@ -249,18 +249,23 @@ module.exports = {
 | `!eval <code>` | Admin | Dynamic JavaScript code evaluator | Bot Admin Only |
 | `!shell <cmd>` | Admin | Executive terminal shell on host server | Bot Admin Only |
 | `!restart` | Admin | Reboots the bot process and reloads modules | Bot Admin Only |
+| `!out [threadID]` | Admin | Make bot leave specified thread | Bot Admin Only |
 | `!nickname [@tag] <nick>` | FCA Utility | Change thread member nickname | Group Admin |
 | `!emoji <emoji>` | FCA Utility | Change thread default reaction emoji | Group Admin |
 | `!userinfo [@tag]` | FCA Utility | Fetch Facebook user profile details | Everyone |
 | `!thread [info/leave]` | FCA Utility | View thread info or make bot leave group | Group Admin |
+| `!tagall <message>` | Utility | Mention all members in group thread | Group Admin |
+| `!check` | Utility | Check member chat activity and message stats | Everyone |
 | `!say <text>` | Media | Text-to-speech voice note generator | Everyone |
 | `!sing <song>` | Media | Search and stream music audio preview | Everyone |
 | `!avatar [@tag]` | Utility | Fetch HD Facebook profile picture | Everyone |
 | `!weather <city>` | Utility | Live weather report & temperature | Everyone |
 | `!quote` | Fun | Random inspirational motivational quotes | Everyone |
+| `!cat` | Fun | Random cute cat photo generator | Everyone |
 | `!daily` | Economy | Claim daily virtual economy coin rewards | Everyone |
 | `!rank` | Economy | Check XP level, rank card, and wallet coins | Everyone |
 | `!slot <bet>` | Economy | Casino slot machine minigame | Everyone |
+| `!setprefix <prefix>` | System | Change custom thread prefix | Group Admin |
 | `!help [command]` | System | Interactive command directory & guides | Everyone |
 | `!ping` | System | Bot latency and server response time | Everyone |
 | `!uptime` | System | Server uptime, Node version, and RAM specs | Everyone |
