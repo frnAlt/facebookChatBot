@@ -194,6 +194,16 @@ npm run dev
 | --- | --- | --- | --- |
 | `!ai <prompt>` | AI | Natural conversational AI with SQLite memory | Everyone |
 | `!group [kick/info/name]` | Admin | Group moderation & title management | Group / Bot Admin |
+| `!admin [add/remove/list]` | Admin | Bot Admin authorization management | Bot Admin Only |
+| `!kick @mention` | Admin | Quick member removal wrapper | Group Admin |
+| `!shell <cmd>` | Admin | Executive terminal shell on host server | Bot Admin Only |
+| `!restart` | Admin | Reboots the bot process and reloads modules | Bot Admin Only |
+| `!say <text>` | Media | Text-to-speech voice note generator | Everyone |
+| `!avatar [@tag]` | Utility | Fetch HD Facebook profile picture | Everyone |
+| `!weather <city>` | Utility | Live weather report & temperature | Everyone |
+| `!quote` | Fun | Random inspirational motivational quotes | Everyone |
+| `!daily` | Economy | Claim daily virtual economy coin rewards | Everyone |
+| `!rank` | Economy | Check XP level, rank card, and wallet coins | Everyone |
 | `!help [command]` | System | Interactive command directory & guides | Everyone |
 | `!ping` | System | Bot latency and server response time | Everyone |
 | `!uptime` | System | Server uptime, Node version, and RAM specs | Everyone |
@@ -201,7 +211,6 @@ npm run dev
 | `!uid [@tag]` | Utility | Lookup Facebook User ID | Everyone |
 | `!tid` | Utility | Get current chat Thread ID | Everyone |
 | `!unsend` | Utility | Unsend bot messages via reply | Everyone |
-| `!shell <cmd>` | Admin | Terminal shell execution on host server | Bot Admin Only |
 
 ---
 
