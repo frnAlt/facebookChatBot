@@ -17,7 +17,8 @@
 [Key Features](#-key-features) •
 [Quick Start](#-quick-start) •
 [Command Suite](#-command-suite) •
-[Web Dashboard](#-web-dashboard) •
+[Developer Guide](#-developer-module-creation-guide) •
+[Web Dashboard](#-web-dashboard--247-hosting) •
 [Developer Info](#-developer--author-info)
 
 </div>
@@ -31,6 +32,7 @@
 - [🛠️ Tech Stack & Architecture](#️-tech-stack--architecture)
 - [🚀 Quick Start & Installation](#-quick-start--installation)
 - [🔐 Session Cookie Setup (`appState.json`)](#-session-cookie-setup-appstatejson)
+- [🛠️ Developer Module Creation Guide](#-developer-module-creation-guide)
 - [⚙️ Command Suite & Event Modules](#️-command-suite--event-modules)
 - [🛡️ Anti-Ban & Security Safeguards](#️-anti-ban--security-safeguards)
 - [🌐 Web Dashboard & 24/7 Hosting](#-web-dashboard--247-hosting)
@@ -45,9 +47,9 @@
 - ⌨️ **Typing Emulation**: Simulates human typing indicators (`sendTypingIndicator`) before dispatching message responses.
 - 🧠 **SQLite Conversation Memory (`memory.js`)**: Long-term message logging enabling natural AI conversations with thread context.
 - 🤖 **Human-Like AI Chatbot (`!ai`)**: Answers command queries and passively responds when tagged or replied to in group chats.
-- 👑 **Group Moderation Tools (`!group`)**: Admin commands for member removal (`kick`), group title updates (`name`), and specs (`info`).
-- 🌐 **Glassmorphic Web Dashboard**: Real-time Express UI displaying system metrics, loaded commands, SQLite memory, and logs.
-- ⚡ **Hot-Reloadable Command Framework**: Dynamic module loader supporting `onStart`, `onChat`, and `onEvent` execution hooks.
+- 👑 **Group Moderation Tools (`!group`, `!warn`, `!antiout`)**: Admin commands for member removal, member warning system with auto-kick, and antiout protection.
+- 🌐 **Glassmorphic Web Dashboard**: Real-time Express UI displaying system metrics, live terminal logs, loaded commands, SQLite memory, and author info.
+- ⚡ **Hot-Reloadable Command Framework**: Dynamic module loader supporting `onStart`, `onChat`, `onReply`, and `onEvent` execution hooks.
 - 🔐 **Session Persistence**: Automatic cookie refresh and auto-saving back to `appState.json`.
 
 ---
@@ -103,20 +105,8 @@ facebookChatBot/
 │   ├── database.js              # Thread & user JSON state database
 │   └── webServer.js             # Express Web Dashboard & API server
 ├── scripts/
-│   ├── cmds/                    # Command modules
-│   │   ├── ai.js                # Human-like AI responder with SQLite memory
-│   │   ├── group.js             # Group maintenance & moderation (kick, info, name)
-│   │   ├── help.js              # Command list & detailed guide
-│   │   ├── ping.js              # Latency test
-│   │   ├── uptime.js            # System memory & uptime status
-│   │   ├── prefix.js            # Per-thread prefix setting
-│   │   ├── uid.js               # User Facebook ID lookup
-│   │   ├── tid.js               # Thread ID lookup
-│   │   ├── unsend.js            # Unsend bot message via reply
-│   │   └── shell.js             # Admin executive terminal shell
-│   └── events/                  # Event modules
-│       ├── welcome.js           # Group welcome event handler
-│       └── leave.js             # Member departure event handler
+│   ├── cmds/                    # 28 Command modules
+│   └── events/                  # 3 Event modules (welcome, leave, antiout)
 └── public/                      # Control panel frontend
     ├── index.html               # Tabbed dashboard HTML UI
     └── style.css                # Glassmorphic dark theme stylesheet
@@ -188,6 +178,64 @@ npm run dev
 
 ---
 
+## 🛠️ Developer Module Creation Guide
+
+### How to Create a Custom Command (`/scripts/cmds/mycommand.js`)
+
+```javascript
+module.exports = {
+  config: {
+    name: "mycommand",
+    version: "1.0.0",
+    author: "Farhan Muh Tasim",
+    countDown: 3,
+    role: 0, // 0 = Public, 1 = Group Admin, 2 = Bot Admin
+    shortDescription: "Custom command example",
+    longDescription: "Demonstrates GoatBot v2 lifecycle hooks.",
+    category: "Custom",
+    guide: "{pn}"
+  },
+
+  // 1. Direct Command Invocation (!mycommand)
+  onStart: async function ({ api, event, args, message, db, memory, fcaEngine }) {
+    return message.reply("Hello from custom GoatBot v2 command!");
+  },
+
+  // 2. Passive Message Listener (Runs on every message in chat)
+  onChat: async function ({ api, event, message, memory }) {
+    if (event.body && event.body.toLowerCase().includes("hello bot")) {
+      message.reply("Hello there friend! 👋");
+    }
+  },
+
+  // 3. Callback Handler for Message Replies
+  onReply: async function ({ api, event, message, replyData }) {
+    message.reply(`You replied to message: ${replyData.commandName}`);
+  }
+};
+```
+
+### How to Create a Custom Event Handler (`/scripts/events/myevent.js`)
+
+```javascript
+module.exports = {
+  config: {
+    name: "myevent",
+    version: "1.0.0",
+    author: "Farhan Muh Tasim",
+    category: "Events"
+  },
+
+  onEvent: async function ({ api, event, logger }) {
+    if (event.logMessageType === "log:subscribe") {
+      logger.event(`New participant added to thread ${event.threadID}`);
+    }
+  }
+};
+```
+
+---
+
 ## ⚙️ Command Suite & Event Modules
 
 | Command | Category | Description | Access Level |
@@ -249,7 +297,7 @@ To push updates to your GitHub repository:
 
 ```bash
 git add .
-git commit -m "docs: enhance README with Floppa-Chatbot design & detailed guides"
+git commit -m "docs: enhance README with developer module creation guide & system methods"
 git push origin main
 ```
 

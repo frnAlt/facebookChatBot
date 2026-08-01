@@ -54,7 +54,7 @@ class FCAEngine {
     return JSON.parse(raw);
   }
 
-  // Initialize Connection
+  // Initialize Connection & Authentication
   async init() {
     const login = this.resolveFCALibrary();
     const appState = this.loadAppState();
@@ -138,7 +138,7 @@ class FCAEngine {
     }
   }
 
-  // --- Core Messenger Functions ---
+  // --- Core Messenger API Functions ---
 
   async editMessage(newText, messageID) {
     return new Promise((resolve, reject) => {
@@ -214,6 +214,36 @@ class FCAEngine {
     return new Promise((resolve, reject) => {
       if (!this.api) return resolve(false);
       this.api.changeAdminStatus(threadID, userID, isAdmin, (err) => {
+        if (err) reject(err);
+        else resolve(true);
+      });
+    });
+  }
+
+  async changeNickname(nickname, threadID, userID) {
+    return new Promise((resolve, reject) => {
+      if (!this.api || typeof this.api.changeNickname !== "function") return resolve(false);
+      this.api.changeNickname(nickname, threadID, userID, (err) => {
+        if (err) reject(err);
+        else resolve(true);
+      });
+    });
+  }
+
+  async changeGroupEmoji(emoji, threadID) {
+    return new Promise((resolve, reject) => {
+      if (!this.api || typeof this.api.changeGroupEmoji !== "function") return resolve(false);
+      this.api.changeGroupEmoji(emoji, threadID, (err) => {
+        if (err) reject(err);
+        else resolve(true);
+      });
+    });
+  }
+
+  async changeThreadColor(color, threadID) {
+    return new Promise((resolve, reject) => {
+      if (!this.api || typeof this.api.changeThreadColor !== "function") return resolve(false);
+      this.api.changeThreadColor(color, threadID, (err) => {
         if (err) reject(err);
         else resolve(true);
       });
